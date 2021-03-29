@@ -23,19 +23,19 @@ services:
             name: http
             options:
             allow:
-              - pattern: '{env(MEDIAWIKI_API_URL,http://localhost/w/api.php)}'
+              - pattern: '{env(MEDIAWIKI_API_URL,http://adruglist.com/api.php)}'
                 forward_headers: true
               - pattern: http://localhost:8142
                 forward_headers: true
               - pattern: /^https?:\/\//
         paths:
-          /{domain:localhost}:
+          /{domain:adruglist.com}:
             x-modules:
               - path: projects/example.yaml
                 options: &default_options
                   action:
                     # XXX Check API URL!
-                    apiUriTemplate: '{env(MEDIAWIKI_API_URL,http://localhost/w/api.php)}'
+                    apiUriTemplate: '{env(MEDIAWIKI_API_URL,http://adruglist.com/api.php)}'
                     baseUriTemplate: "{{'http://{domain}:7231/{domain}/v1'}}"
                   parsoid:
                     # XXX Check Parsoid URL!
@@ -66,9 +66,9 @@ services:
       serverInterface: 0.0.0.0
       debug: false
       mwApis:
-        - domain: localhost
-          prefix: localhost
-          uri: '{env(MEDIAWIKI_API_URL,http://localhost/w/api.php)}'
+        - domain: adruglist.com
+          prefix: adruglist.com
+          uri: '{env(MEDIAWIKI_API_URL,http://adruglist.com/api.php)}'
 
 # Finally, a standard service-runner config.
 info:
